@@ -1,6 +1,6 @@
 {
   "name": "@monousoooo/eslint-define-config",
-  "version": "1.24.1",
+  "version": "1.0.0",
   "description": "Provide a defineConfig function for .eslintrc.js files",
   "scripts": {
     "clean": "rimraf dist",

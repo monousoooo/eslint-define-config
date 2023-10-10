@@ -1,5 +1,6 @@
 import type { ESLintConfig } from './config';
 import type { FlatESLintConfig } from './flat-config';
+import { BuiltinRules, RuleConfig } from './rules';
 
 /**
  * Define an ESLint config.
@@ -7,7 +8,10 @@ import type { FlatESLintConfig } from './flat-config';
  * @param config ESLint config.
  * @returns ESLint config.
  */
-export function defineConfig(config: ESLintConfig): ESLintConfig {
+export function defineConfig<
+  Rules extends Record<any, RuleConfig> = BuiltinRules,
+  Strict extends boolean = false,
+>(config: ESLintConfig<Rules, Strict>): ESLintConfig {
   return config;
 }
 
@@ -19,7 +23,10 @@ export function defineConfig(config: ESLintConfig): ESLintConfig {
  * @param config an item of Flat ESLint config.
  * @returns an item of Flat ESLint config.
  */
-export function defineFlatConfig(config: FlatESLintConfig): FlatESLintConfig;
+export function defineFlatConfig<
+  Rules extends Record<string, RuleConfig> = BuiltinRules,
+  Strict extends boolean = false,
+>(config: FlatESLintConfig): FlatESLintConfig;
 
 /**
  * Define a flat ESLint config.
@@ -41,3 +48,4 @@ export type * from './config';
 export type * from './flat-config';
 export type * from './parser-options';
 export type * from './rules';
+export type * from './utils';

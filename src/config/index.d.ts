@@ -1,5 +1,5 @@
 import type { Parser, ParserOptions } from '../parser-options';
-import type { Rules } from '../rules';
+import type { BuiltinRules, RuleConfig } from '../rules';
 import type { Environments } from './env';
 import type { Extends } from './extends';
 import type { Overrides } from './overrides';
@@ -11,7 +11,10 @@ import type { Settings } from './settings';
  *
  * @see [ESLint Configuration](https://eslint.org/docs/latest/user-guide/configuring/)
  */
-export interface ESLintConfig {
+export interface ESLintConfig<
+  Rules extends Record<string, RuleConfig> = BuiltinRules,
+  Strict extends boolean = false,
+> {
   /**
    * @see [Using Configuration Files](https://eslint.org/docs/latest/user-guide/configuring/configuration-files#using-configuration-files)
    */
@@ -83,7 +86,9 @@ export interface ESLintConfig {
    *
    * @see [Rules](https://eslint.org/docs/latest/user-guide/configuring/rules)
    */
-  rules?: Rules;
+  rules?: Strict extends true
+    ? Partial<Rules>
+    : Partial<Rules & Record<string, RuleConfig>>;
 
   /**
    * Overrides.
